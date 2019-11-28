@@ -1,0 +1,1 @@
+# Scoreboard Full Page Component
