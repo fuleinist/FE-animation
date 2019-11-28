@@ -14,9 +14,9 @@ const MainScore = ({animation, show}) => {
   const classes = useMainScoreStyles();
   return (
     <div className={classes.root}>
-      <Slidein show={show} animation={{delay: 1}}>KC</Slidein>
-      <Slidein show={show} animation={{delay: 0}}>0 - 4</Slidein>
-      <Slidein show={show} animation={{delay: 1}}>GG</Slidein>
+      <Slidein show={show} animation={{delay: 0.6, side: 'left'}}>KC</Slidein>
+      <Slidein show={show} animation={{delay: 0, side: 'bottom'}}>0 - 4</Slidein>
+      <Slidein show={show} animation={{delay: 0.6, side: 'left'}}>GG</Slidein>
     </div>
   )
 }

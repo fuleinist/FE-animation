@@ -9,18 +9,26 @@ import React, { useState, useEffect } from 'react';
 import { useSlideinStyles } from './Slidein.component.styles';
 
 const Slidein = ({children, show, animation}) => {
-  const { duration, delay } = animation || {};
+  const { duration, delay, side } = animation || {};
   const [shouldRender, setRender] = useState(show);
 
   useEffect(() => {
-    if (show) setRender(true);
+    const delayedEffect = async () => {
+      if( typeof delay === 'function' && delay.constructor.name === 'AsyncFunction') {
+        await delay();
+        setRender(true);
+      } else {
+        setRender(true);
+      }
+    }
+    delayedEffect();
   }, [show]);
 
   const onAnimationEnd = () => {
     // if (!show) setRender(false);
   }; 
 
-  const classes = useSlideinStyles({duration, delay: delay * 1000});
+  const classes = useSlideinStyles({duration, delay: delay * 1000, side});
     return (
       shouldRender && (
         <div 

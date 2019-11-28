@@ -1,11 +1,10 @@
 {
   "presets": [
     ["@babel/preset-env", {
-        "targets": {
-            "browsers": ["last 2 versions", "Explorer 11"]
-        }
-    }
-    ],
+      "targets": { "browsers": ["last 2 chrome versions"] },
+      "useBuiltIns": "usage"
+    }],
     "@babel/preset-react"
-  ]
+  ],
+  "plugins": ["@babel/plugin-transform-async-to-generator"]
 }

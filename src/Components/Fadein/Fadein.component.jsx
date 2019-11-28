@@ -13,7 +13,15 @@ const Fadein = ({children, show, animation}) => {
   const [shouldRender, setRender] = useState(show);
 
   useEffect(() => {
-    if (show) setRender(true);
+    const delayedEffect = async () => {
+      if( typeof delay === 'function' && delay.constructor.name === 'AsyncFunction') {
+        await delay();
+        setRender(true);
+      } else {
+        setRender(true);
+      }
+    }
+    delayedEffect();
   }, [show]);
 
   const onAnimationEnd = () => {
