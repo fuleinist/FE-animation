@@ -13,8 +13,8 @@ import Slidein from '../Slidein/Slidein.component'
 import Fadein from '../Fadein/Fadein.component'
 import Scorebox from '../Scorebox/Scorebox.component'
 
-const TeamStat = ({show, teamstat, delay}) => {
-  const { team, stats } = teamstat || {};
+const TeamStat = ({show, teamstats, delay}) => {
+  const { team, stats } = teamstats || {};
   const classes = useTeamStatStyles();
   return (
     <div className={classes.root}>
