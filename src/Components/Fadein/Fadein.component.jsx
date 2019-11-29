@@ -5,24 +5,15 @@
  * @returns {JSX.Element} The `<Fadein />` component.
  */
  
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useFadeinStyles } from './Fadein.component.styles';
+import { propTypes, defaultProps } from './Fadein.component.props'
+
+import { useDelayedRender } from '../../Hooks/UseDelayedRender/UseDelayedRender.hook';
 
 const Fadein = ({children, show, animation}) => {
   const { duration, delay } = animation || {};
-  const [shouldRender, setRender] = useState(show);
-
-  useEffect(() => {
-    const delayedEffect = async () => {
-      if( typeof delay === 'function' && delay.constructor.name === 'AsyncFunction') {
-        await delay();
-        setRender(true);
-      } else {
-        setRender(true);
-      }
-    }
-    delayedEffect();
-  }, [show]);
+  const [shouldRender] = useDelayedRender(show, delay);
 
   const onAnimationEnd = () => {
     // if (!show) setRender(false);
@@ -30,14 +21,19 @@ const Fadein = ({children, show, animation}) => {
 
   const classes = useFadeinStyles({duration, delay: delay * 1000});
     return (
-      shouldRender && (
-        <div 
-          className={show ? classes.fadeIn : classes.fadeOut} 
-          onAnimationEnd={onAnimationEnd}>
-          {children}
+      shouldRender ? (
+        <div className={classes.root}>
+          <div 
+            className={show ? classes.fadeIn : classes.fadeOut} 
+            onAnimationEnd={onAnimationEnd}>
+            {children}
+          </div>
         </div>
-    )
+    ) : null
   )
 };
+
+Fadein.propTypes = propTypes;
+Fadein.defaultProps = defaultProps;
 
 export default Fadein;

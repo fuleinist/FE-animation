@@ -9,6 +9,7 @@ const SLIDETRANSFORM = {
 
 export const useSlideinStyles = createUseStyles({
   root: {
+    overflow: 'hidden'
   },
   "@keyframes slide-in": {
     ['100%']: { transform: `translateX(0%)` }
@@ -27,12 +28,14 @@ export const useSlideinStyles = createUseStyles({
   },
   slideIn: ({ duration = 1000, delay = 0, side = 'left' }) => ({
     transform: SLIDETRANSFORM[side] || SLIDETRANSFORM.left,
+    position: 'static',
     animationName: `$slide-in`,
     animationDuration: duration,
     animationDelay: delay,
     animationFillMode: 'forwards'
   }),
   slideOut: ({ duration = 1000, delay = 0, side = 'left' }) => ({
+    position: 'static',
     animationName: `$slide-out-${side}`,
     animationDuration: duration,
     animationDelay: delay,
